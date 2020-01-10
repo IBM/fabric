@@ -84,7 +84,7 @@ GO_TAGS ?=
 RELEASE_EXES = orderer $(TOOLS_EXES)
 RELEASE_IMAGES = baseos ccenv orderer peer tools
 RELEASE_PLATFORMS = darwin-amd64 linux-amd64 linux-ppc64le linux-s390x windows-amd64
-TOOLS_EXES = configtxgen configtxlator cryptogen discover idemixgen peer
+TOOLS_EXES = configtxgen configtxlator cryptogen discover idemixgen peer token
 
 pkgmap.configtxgen    := $(PKGNAME)/cmd/configtxgen
 pkgmap.configtxlator  := $(PKGNAME)/cmd/configtxlator
@@ -93,6 +93,7 @@ pkgmap.discover       := $(PKGNAME)/cmd/discover
 pkgmap.idemixgen      := $(PKGNAME)/cmd/idemixgen
 pkgmap.orderer        := $(PKGNAME)/cmd/orderer
 pkgmap.peer           := $(PKGNAME)/cmd/peer
+pkgmap.token          := $(PKGNAME)/cmd/token
 
 .DEFAULT_GOAL := all
 

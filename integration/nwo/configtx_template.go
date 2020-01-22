@@ -209,6 +209,9 @@ Profiles:{{ range .Profiles }}
         Admins:
           Type: ImplicitMeta
           Rule: MAJORITY Admins
+        Issuers:
+          Type: ImplicitMeta
+          Rule: ANY Writers
         LifecycleEndorsement:
           Type: ImplicitMeta
           Rule: "MAJORITY Endorsement"

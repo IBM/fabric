@@ -5,8 +5,8 @@ import (
 	"sync"
 	"time"
 
-	mspfabric "github.com/hyperledger/fabric/msp"
 	"github.com/hyperledger/fabric-protos-go/msp"
+	mspfabric "github.com/hyperledger/fabric/msp"
 	"github.com/hyperledger/fabric/token/identity"
 )
 

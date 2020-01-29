@@ -368,7 +368,7 @@ var _ = Describe("ValidatorCommitter", func() {
 			for _, config := range ccPkg.Config {
 				collectionNames = append(collectionNames, config.GetStaticCollectionConfig().GetName())
 			}
-			Expect(collectionNames).Should(ConsistOf("collection-name", "_implicit_org_first-mspid", "_implicit_org_second-mspid"))
+			Expect(collectionNames).Should(ConsistOf("collection-name", "+local", "_implicit_org_first-mspid", "_implicit_org_second-mspid"))
 		})
 
 		Context("when no explicit collection config is defined", func() {
@@ -386,14 +386,14 @@ var _ = Describe("ValidatorCommitter", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
 
-			It("returns only implicit collections", func() {
+			It("returns only implicit collections and the local collection", func() {
 				ccPkg, err := vc.AllCollectionsConfigPkg("channel-name", "cc-without-explicit-collection", fakeQueryExecutor)
 				Expect(err).NotTo(HaveOccurred())
 				collectionNames := []string{}
 				for _, config := range ccPkg.Config {
 					collectionNames = append(collectionNames, config.GetStaticCollectionConfig().GetName())
 				}
-				Expect(collectionNames).Should(ConsistOf("_implicit_org_first-mspid", "_implicit_org_second-mspid"))
+				Expect(collectionNames).Should(ConsistOf("+local", "_implicit_org_first-mspid", "_implicit_org_second-mspid"))
 			})
 		})
 

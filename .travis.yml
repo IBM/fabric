@@ -15,5 +15,5 @@ jobs:
     - stage:  Preliminaries
       script: make basic-checks
     - stage: Unit tests
-      script: bash ./scripts/run-unit-tests.sh
+      script: make unit-test
 

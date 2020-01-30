@@ -7,8 +7,8 @@ SPDX-License-Identifier: Apache-2.0
 package transaction
 
 import (
-	"github.com/hyperledger/fabric/core/ledger"
 	"github.com/hyperledger/fabric-protos-go/common"
+	"github.com/hyperledger/fabric/core/ledger"
 	"github.com/pkg/errors"
 )
 

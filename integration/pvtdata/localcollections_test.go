@@ -51,7 +51,7 @@ func query(network *nwo.Network, peer *nwo.Peer, chid, ccid, args string, expect
 	}
 }
 
-var _ bool = FDescribe("LocalCollections", func() {
+var _ bool = Describe("LocalCollections", func() {
 	var (
 		network *nwo.Network
 		process ifrit.Process

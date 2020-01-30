@@ -12,8 +12,8 @@ import (
 	"time"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric/common/util"
 	"github.com/hyperledger/fabric-protos-go/ledger/queryresult"
+	"github.com/hyperledger/fabric/common/util"
 	"github.com/hyperledger/fabric/protos/token"
 	mock3 "github.com/hyperledger/fabric/token/identity/mock"
 	mock2 "github.com/hyperledger/fabric/token/ledger/mock"

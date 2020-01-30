@@ -87,6 +87,11 @@ func (sig *NymSignature) Ver(nym *FP256BN.ECP, ipk *IssuerPublicKey, msg []byte)
 
 	chanGr2 := make(chan *FP256BN.ECP, 1)
 	go func() {
+		defer func() {
+			if err := recover(); err != nil {
+				chanGr2 <- nil
+			}
+		}()
 		ProofSSk := FP256BN.FromBytes(sig.GetProofSSk())
 		ProofSRNym := FP256BN.FromBytes(sig.GetProofSRNym())
 		HRand := EcpFromProto(ipk.HRand)
@@ -99,6 +104,10 @@ func (sig *NymSignature) Ver(nym *FP256BN.ECP, ipk *IssuerPublicKey, msg []byte)
 		case temp = <-chanGr1:
 		case t = <-chanGr2:
 		}
+	}
+
+	if t == nil {
+		panic("runtime error: index out of range")
 	}
 
 	t.Sub(temp) // t = h_{sk}^{s_{sk} \ cdot h_r^{s_{RNym}

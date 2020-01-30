@@ -107,7 +107,7 @@ run_tests() {
 
         local serial=$(serial_test_packages "$@") # race is disabled as well
         if [ -n "${serial}" ]; then
-	    if [[ "$type" == "serial" ]]; then 
+	    if [[ "$type" == "serial" ]]; then
 	            go test ${flags} -tags "$GO_TAGS" ${serial[@]} -short -p 1 -timeout=20m
 	    fi
         fi

@@ -1,4 +1,9 @@
 #!/usr/bin/env bash -xe
+#
+# Copyright IBM Corp. All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+
 
 go get -u golang.org/x/tools/cmd/goimports
 

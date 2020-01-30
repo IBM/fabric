@@ -5,14 +5,10 @@ go:
 
 go_import_path: github.com/hyperledger/fabric
 
-script: bash ./scripts/build_checks.sh
-
 jobs:
   include:
     - stage:  Preliminaries
-      script: bash ./scripts/build_checks.sh
-    - stage: parallel UT
-      script: bash ./unit-test/run.sh parallel
-    - stage: serial UT
-      script: bash ./unit-test/run.sh serial
+      script: make basic-checks
+    - stage: Unit tests
+      script: bash ./scripts/run-unit-tests.sh
 

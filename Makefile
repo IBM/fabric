@@ -143,6 +143,14 @@ check-go-version:
 integration-test: gotool.ginkgo ccenv-docker baseos-docker docker-thirdparty
 	./scripts/run-integration-tests.sh
 
+.PHONY: integration-test-P1
+integration-test-P1: gotool.ginkgo ccenv-docker baseos-docker docker-thirdparty
+	./scripts/run-integration-tests.sh ./integration/nwo ./integration/lifecycle ./integration/msp ./integration/token ./integration/gossip ./integration/ledger ./integration/pluggable
+
+.PHONY: integration-test-P2
+integration-test-P2: gotool.ginkgo ccenv-docker baseos-docker docker-thirdparty
+	./scripts/run-integration-tests.sh ./integration/raft ./integration/pvtdata ./integration/discovery ./integration/sbe ./integration/idemix ./integration/e2e ./internal/configtxlator/integration
+
 .PHONY: unit-test
 unit-test: unit-test-clean docker-thirdparty ccenv-docker baseos-docker
 	./scripts/run-unit-tests.sh

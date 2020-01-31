@@ -16,6 +16,8 @@ jobs:
       script: make basic-checks
     - stage: Unit tests
       script: make unit-test
-    - stage: Integration tests
-      script: make integration-test
+    - stage: Integration tests (Phase 1)
+      script: make integration-test-P1
+    - stage: Integration tests (Phase 2)
+      script: make integration-test-P2
 

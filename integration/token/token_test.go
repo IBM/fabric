@@ -163,15 +163,15 @@ var _ bool = Describe("Token EndToEnd", func() {
 		It("executes a basic solo network and submits token transaction", func() {
 			By("issuing tokens to user2")
 
-			user1 := getShellIdentity(network, network.Peer("Org1", "peer1"), "User1", "Org1MSP")
-			user2 := getShellIdentity(network, network.Peer("Org1", "peer1"), "User2", "Org1MSP")
+			user1 := getShellIdentity(network, network.Peer("Org1", "peer0"), "User1", "Org1MSP")
+			user2 := getShellIdentity(network, network.Peer("Org1", "peer0"), "User2", "Org1MSP")
 
 			// User1 issues 100 ABC123 tokens to User2
-			IssueToken(network, network.Peer("Org1", "peer1"), network.Orderer("orderer"),
+			IssueToken(network, network.Peer("Org1", "peer0"), network.Orderer("orderer"),
 				"testchannel", "User1", "Org1MSP", "ABC123", "100", string(user2))
 
 			// User2 lists her tokens and verify
-			outputs := ListTokens(network, network.Peer("Org1", "peer1"), network.Orderer("orderer"),
+			outputs := ListTokens(network, network.Peer("Org1", "peer0"), network.Orderer("orderer"),
 				"testchannel", "User2", "Org1MSP")
 			Expect(len(outputs)).To(BeEquivalentTo(1))
 			fmt.Println(outputs[0].Quantity)
@@ -180,7 +180,7 @@ var _ bool = Describe("Token EndToEnd", func() {
 			Expect(outputs[0].Type).To(BeEquivalentTo("ABC123"))
 
 			// User2 transfers back the tokens to User1
-			TransferTokens(network, network.Peer("Org1", "peer1"), network.Orderer("orderer"),
+			TransferTokens(network, network.Peer("Org1", "peer0"), network.Orderer("orderer"),
 				"testchannel", "User2", "Org1MSP",
 				[]*token.TokenId{outputs[0].Id},
 				[]*token2.ShellRecipientShare{
@@ -196,26 +196,26 @@ var _ bool = Describe("Token EndToEnd", func() {
 			)
 
 			// User2 lists her tokens and verify
-			outputs = ListTokens(network, network.Peer("Org1", "peer1"), network.Orderer("orderer"),
+			outputs = ListTokens(network, network.Peer("Org1", "peer0"), network.Orderer("orderer"),
 				"testchannel", "User2", "Org1MSP")
 			Expect(len(outputs)).To(BeEquivalentTo(1))
 			Expect(outputs[0].Quantity).To(BeEquivalentTo(ToDecimal(50)))
 			Expect(outputs[0].Type).To(BeEquivalentTo("ABC123"))
 
 			// User1 lists her tokens and verify
-			outputs = ListTokens(network, network.Peer("Org1", "peer1"), network.Orderer("orderer"),
+			outputs = ListTokens(network, network.Peer("Org1", "peer0"), network.Orderer("orderer"),
 				"testchannel", "User2", "Org1MSP")
 			Expect(len(outputs)).To(BeEquivalentTo(1))
 			Expect(outputs[0].Quantity).To(BeEquivalentTo(ToDecimal(50)))
 			Expect(outputs[0].Type).To(BeEquivalentTo("ABC123"))
 
 			// User1 redeems 25 of her tokens
-			RedeemTokens(network, network.Peer("Org1", "peer1"), network.Orderer("orderer"),
+			RedeemTokens(network, network.Peer("Org1", "peer0"), network.Orderer("orderer"),
 				"testchannel", "User2", "Org1MSP",
 				[]*token.TokenId{outputs[0].Id}, 25)
 
 			// User1 lists her tokens and verify again
-			outputs = ListTokens(network, network.Peer("Org1", "peer1"), network.Orderer("orderer"),
+			outputs = ListTokens(network, network.Peer("Org1", "peer0"), network.Orderer("orderer"),
 				"testchannel", "User2", "Org1MSP")
 			Expect(len(outputs)).To(BeEquivalentTo(1))
 			Expect(outputs[0].Quantity).To(BeEquivalentTo(ToDecimal(25)))
@@ -236,7 +236,7 @@ var _ bool = Describe("Token EndToEnd", func() {
 			client, err = docker.NewClientFromEnv()
 			Expect(err).NotTo(HaveOccurred())
 
-			peer := network.Peer("Org1", "peer1")
+			peer := network.Peer("Org1", "peer0")
 			// Get recipients' identity
 			recipientUser2Bytes, err := getIdentity(network, peer, "User2", "Org1MSP")
 			Expect(err).NotTo(HaveOccurred())
@@ -262,7 +262,7 @@ var _ bool = Describe("Token EndToEnd", func() {
 			network.CreateAndJoinChannel(orderer, "testchannel")
 
 			By("getting the client peer by name")
-			peer := network.Peer("Org1", "peer1")
+			peer := network.Peer("Org1", "peer0")
 
 			By("creating a new client")
 			config := getClientConfig(network, peer, orderer, "testchannel", "User1", "Org1MSP")
@@ -341,7 +341,7 @@ var _ bool = Describe("Token EndToEnd", func() {
 			client, err = docker.NewClientFromEnv()
 			Expect(err).NotTo(HaveOccurred())
 
-			peer = network.Peer("Org1", "peer1")
+			peer = network.Peer("Org1", "peer0")
 
 			// Get recipients' identity
 			recipientUser2Bytes, err := getIdentity(network, peer, "User2", "Org1MSP")
@@ -1010,7 +1010,7 @@ var _ bool = Describe("Token EndToEnd", func() {
 			orderer = network.Orderer("orderer")
 			network.CreateAndJoinChannel(orderer, "testchannel")
 
-			peer = network.Peer("Org1", "peer1")
+			peer = network.Peer("Org1", "peer0")
 
 			recipientUser2Bytes, err := getIdentity(network, peer, "User2", "Org1MSP")
 			Expect(err).NotTo(HaveOccurred())

@@ -209,13 +209,9 @@ main() {
     elif [ "${JOB_TYPE}" = "PROFILE" ]; then
         echo "mode: set" > profile.cov
         [ "${#packages}" -eq 0 ] || run_tests_with_coverage "${packages[@]}"
-        [ "${#packages_with_plugins}" -eq 0 ] || GO_TAGS="${GO_TAGS} pluginsenabled" run_tests_with_coverage "${packages_with_plugins[@]}"
-        [ "${#packages_with_pkcs11}" -eq 0 ] || GO_TAGS="${GO_TAGS} pkcs11" run_tests_with_coverage "${packages_with_pkcs11[@]}"
         gocov convert profile.cov | gocov-xml > report.xml
     else
         [ "${#packages}" -eq 0 ] || run_tests "${packages[@]}"
-        [ "${#packages_with_plugins}" -eq 0 ] || GO_TAGS="${GO_TAGS} pluginsenabled" run_tests "${packages_with_plugins[@]}"
-        [ "${#packages_with_pkcs11}" -eq 0 ] || GO_TAGS="${GO_TAGS} pkcs11" run_tests "${packages_with_pkcs11[@]}"
     fi
 }
 
